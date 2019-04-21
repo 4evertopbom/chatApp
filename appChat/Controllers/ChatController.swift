@@ -10,8 +10,8 @@ import UIKit
 
 class ChatController: UIViewController {
 
-    let channelView: UIView = {
-        let vc = UIView()
+    let channelView: ChannelView = {
+        let vc = ChannelView()
         vc.backgroundColor = .white
         return vc
     }()
