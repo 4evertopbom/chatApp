@@ -44,6 +44,7 @@ class ChannelView: UIView {
     
     let channelTableView: UITableView = {
         let tbv = UITableView(frame: .zero)
+        tbv.backgroundColor = .clear
         return tbv
     }()
     
@@ -74,6 +75,7 @@ class ChannelView: UIView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
 }
 
 extension ChannelView: UITableViewDataSource, UITableViewDelegate {
@@ -83,6 +85,7 @@ extension ChannelView: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
+        cell.backgroundColor = .clear
         return cell
     }
 

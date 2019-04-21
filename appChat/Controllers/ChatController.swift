@@ -12,7 +12,6 @@ class ChatController: UIViewController {
 
     let channelView: ChannelView = {
         let vc = ChannelView()
-        vc.backgroundColor = .white
         return vc
     }()
     
@@ -36,6 +35,10 @@ class ChatController: UIViewController {
             blackView.backgroundColor = UIColor(white: 0, alpha: 0.5)
             window.addSubview(blackView)
             window.addSubview(channelView)
+            DispatchQueue.main.async {
+                self.channelView.setGradientBackground(colorOne: UIColor.yellow, colorTwo: UIColor.green)
+            }
+        
             let width = window.frame.width * 3 / 4
             channelView.frame = CGRect(x: -width, y: 0, width: width, height: window.frame.height)
             
