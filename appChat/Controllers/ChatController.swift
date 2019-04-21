@@ -8,7 +8,21 @@
 
 import UIKit
 
-class ChatController: UIViewController {
+class ChatController: UIViewController, ChannelViewDelegate {
+    func showLogIn() {
+        let vc = LoginVC()
+        UIView.animate(withDuration: 0.5) {
+            self.blackView.alpha = 0
+            if let window = UIApplication.shared.keyWindow {
+                let width = window.frame.width * 3 / 4
+                self.channelView.frame = CGRect(x: -width, y: 0, width: width, height: window.frame.height)
+            }
+        }
+        UIView.animate(withDuration: 0.5) {
+            self.present(vc, animated: true, completion: nil)
+        }
+    }
+    
 
     let channelView: ChannelView = {
         let vc = ChannelView()
@@ -23,6 +37,9 @@ class ChatController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        navigationController?.navigationBar.setGradientBackground(colorOne: UIColor.yellow, colorTwo: UIColor.green)
+     //   navigationController!.navigationBar.s
+        
         navigationItem.title = "Smack"
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "list")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleOpenChannelVC))
     }
@@ -35,8 +52,10 @@ class ChatController: UIViewController {
             blackView.backgroundColor = UIColor(white: 0, alpha: 0.5)
             window.addSubview(blackView)
             window.addSubview(channelView)
+            
             DispatchQueue.main.async {
                 self.channelView.setGradientBackground(colorOne: UIColor.yellow, colorTwo: UIColor.green)
+                self.channelView.delegate = self
             }
         
             let width = window.frame.width * 3 / 4

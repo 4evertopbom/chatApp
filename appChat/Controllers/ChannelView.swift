@@ -9,6 +9,10 @@
 import Foundation
 import UIKit
 
+protocol ChannelViewDelegate {
+    func showLogIn()
+}
+
 class ChannelView: UIView {
     let cellId = "cellId"
     
@@ -39,8 +43,16 @@ class ChannelView: UIView {
         bt.setTitle("Login", for: .normal)
         bt.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
         bt.tintColor = .black
+        bt.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
         return bt
     }()
+    
+    var delegate: ChannelViewDelegate?
+    
+    @objc func handleLogin() {
+        print("touching..")
+        delegate?.showLogIn()
+    }
     
     let channelTableView: UITableView = {
         let tbv = UITableView(frame: .zero)
